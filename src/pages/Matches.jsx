@@ -19,8 +19,7 @@ function MatchCard(props) {
 function Matches() {
   return (
     <main className="matches-page">
-
-      <h1>Upcoming IPL Matches</h1>
+<h1>Upcoming IPL Matches</h1>
 
       <div className="matches-grid">
         <MatchCard
@@ -29,16 +28,19 @@ function Matches() {
           venue="M. Chinnaswamy Stadium, Bengaluru"
           date="25 March 2026"
         />
-                <MatchCard
+
+
+
+        <MatchCard
           team1="MI"
           team2="KKR"
           venue="Wankhede Stadium, Mumbai"
           date="28 March 2026"
         />
+
       </div>
 
     </main>
   );
 }
-
 export default Matches;
