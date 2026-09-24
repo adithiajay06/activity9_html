@@ -1,50 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Booking Page</title>
-  <link rel="stylesheet" href="act5.css">
-</head>
-<body>
-
-  <!-- Header (Flexbox: logo + nav links) -->
-  <header>
-    <div class="logo">MyLogo</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Booking</a>
-      <a href="#">Summary</a>
-    </nav>
-  </header>
-
-  <!-- Main (Grid: form + summary side by side) -->
-  <main class="grid-container">
-    <section class="form">
-      <h2>Booking Form</h2>
-      <form>
-        <label>Name:</label>
-        <input type="text" placeholder="Enter name">
-        <label>Date:</label>
-        <input type="date">
-        <button type="submit">Book</button>
-      </form>
-    </section>
-
-    <section class="summary">
-      <h2>Booking Summary</h2>
-      <p>No bookings yet.</p>
-    </section>
-  </main>
-
-  <!-- Table (scrollable on small screens) -->
-  <div class="table-container">
-    <table>
-      <tr><th>Match</th><th>Date</th><th>Tickets</th></tr>
-      <tr><td>Match 1</td><td>10 Sep</td><td>Available</td></tr>
-      <tr><td>Match 2</td><td>12 Sep</td><td>Sold Out</td></tr>
-    </table>
-  </div>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ipl-ticket-booking</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
