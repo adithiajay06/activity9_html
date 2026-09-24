@@ -1,72 +1,120 @@
 import { useState } from "react";
-import { supabase } from "../supabase";
+import { supabase } from "../Supabase";
 
 function Booking() {
-  const [form, setForm] = useState({
-    name: "",
-    tickets: "",
-    stand: "",
-    venue: "",
-    place: "",
-  });
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setForm((current) => ({ ...current, [name]: value }));
-  }
+    const [name, setName] = useState("");
+    const [tickets, setTickets] = useState("");
+    const [stand, setStand] = useState("");
+    const [venue, setVenue] = useState("");
 
-  async function handleBooking(event) {
-    event.preventDefault();
+    async function handleBooking() {
 
-    if (!form.name || !form.tickets || !form.stand || !form.venue || !form.place) {
-      alert("Please fill all the details");
-      return;
-    }
+        if (!name || !tickets || !stand || !venue ) {
+            alert("Please fill all the details");
+            return;
+        }
 
-    const { error } = await supabase
-      .from("bookings")
-      .insert([{ ...form, tickets: Number(form.tickets) }]);
+        const { data, error } = await supabase
+            .from("bookings")
+            .insert([
+            {
+                name: name,
+                tickets: Number(tickets),
+                stand: stand,
+                venue: venue
+                
+            }
+            ]);
 
-    if (error) {
-      console.error(error);
-      alert("Booking failed");
-      return;
-    }
+        if (error) {
+            console.error(error);
+            alert("Booking failed");
+            return;
+        }
 
-    alert("Ticket booked successfully!");
-    setForm({ name: "", tickets: "", stand: "", venue: "", place: "" });
-  }
+        alert("Ticket booked successfully!");
 
-  return (
-    <main className="booking-page">
-      <h1>Book Your Ticket</h1>
-      <form className="booking-form" onSubmit={handleBooking}>
-        <label htmlFor="name">Name</label>
-        <input id="name" name="name" value={form.name} onChange={handleChange} />
+        }
+    
 
-        <label htmlFor="tickets">Tickets</label>
-        <input
-          id="tickets"
-          name="tickets"
-          type="number"
-          min="1"
-          value={form.tickets}
-          onChange={handleChange}
-        />
 
-        <label htmlFor="stand">Stand</label>
-        <input id="stand" name="stand" value={form.stand} onChange={handleChange} />
 
-        <label htmlFor="venue">Venue</label>
-        <input id="venue" name="venue" value={form.venue} onChange={handleChange} />
 
-        <label htmlFor="place">Place</label>
-        <input id="place" name="place" value={form.place} onChange={handleChange} />
 
-        <button type="submit">Book Ticket</button>
-      </form>
-    </main>
-  );
+    return (
+        <main className="booking-page">
+
+            <h1>Book Your Ticket</h1>
+
+            <div className="booking-form">
+                <label htmlFor="name">Name</label>
+
+                <input
+                    id="name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your name"
+                />
+
+                <label htmlFor="tickets">Number of Tickets</label>
+
+                <input
+                    id="tickets"
+                    type="number"
+                    min="1"
+                    value={tickets}
+                    onChange={(e) => setTickets(e.target.value)}
+                    placeholder="Enter number of tickets"
+                />
+                   <label htmlFor="stand">Select Stand</label>
+
+    <select
+          id="stand"
+           value={stand}
+           onChange={(e) => setStand(e.target.value)}
+        >
+           <option value="">-- Select Stand --</option>
+           <option value="General Stand">General Stand</option>
+           <option value="VIP Stand">VIP Stand</option>
+     </select>
+
+     <label htmlFor="venue">Select Venue</label>
+
+         <select
+             id="venue"
+             value={venue}
+             onChange={(e) => setVenue(e.target.value)}
+           >
+           <option value="">-- Select Venue --</option>
+           <option value="Wankhede Stadium">Wankhede Stadium</option>
+           <option value="M. Chinnaswamy Stadium"> M. Chinnaswamy Stadium
+                    </option>
+        </select>
+       
+        <button onClick={handleBooking}>
+                     Book Ticket</button>
+
+
+
+            </div>
+
+            <section className="booking-details">
+                <h3>Booking Details</h3>
+
+                <p>Name: <strong>{name || "-"}</strong></p>
+
+                <p>Tickets: <strong>{tickets || "-"}</strong></p>
+
+                 <p>Stand: <strong>{stand || "-"}</strong></p>
+                <p>Venue: <strong>{venue || "-"}</strong></p>
+
+
+            </section>
+
+        </main>
+    );
 }
 
 export default Booking;
